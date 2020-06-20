@@ -17,6 +17,7 @@ mv_mean = parameter_grouped_data.mv.mean()
 for i in range(len(data)):
     data.at[i,'mean']=mv_mean[data.loc[i]['parameterid']]
     data.at[i,'standard_dev']=mv_stdev[data.loc[i]['parameterid']]
+    data.at[i,'target_value']=int(mv_mean[data.loc[i]['parameterid']])
     
-data.to_csv('data/data_w_mean_std.csv')
+data.to_csv('data/data_w_mean_std.csv', index=False)
 
