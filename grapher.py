@@ -15,7 +15,7 @@ data = pd.read_csv('data/data_w_mean_std.csv')
 
 parameter_grouped_data = dict(list(data.groupby('parameterid')))
 parameters = list(parameter_grouped_data.keys())
-for parameter in parameters:
+for index,parameter in enumerate(parameters):
     plt.figure(figsize=[12,6])
     
     mean=parameter_grouped_data[parameter]['mean'].mean()
@@ -28,8 +28,8 @@ for parameter in parameters:
         print('data not enough... aborting for',parameter)
         continue
     
-    usl = min(parameter_grouped_data[parameter].usl.mean(),mean+standard_dev*3)
-    lsl = max(parameter_grouped_data[parameter].lsl.mean(),mean-standard_dev*3)
+    usl = parameter_grouped_data[parameter].usl.mean()
+    lsl = parameter_grouped_data[parameter].lsl.mean()
     
     plt.axvline(usl,linestyle='dashed',label='USL ='+str(usl),color='b')
     plt.axvline(lsl,linestyle='dashed',label='LSL ='+str(lsl),color='g')
@@ -49,11 +49,13 @@ for parameter in parameters:
     
     plt.plot(bell_x,bell_y,linestyle='dashed',color='black',label='lineCurve')
     plt.plot(expected_x,expected_y,color='red',label='expected bell curve')
-    
+    plt.xlim([mean-10*standard_dev,mean+10*standard_dev])
     
     plt.legend()
     plt.savefig('graphs/'+str(parameter)+'.png')
     plt.close()
-    print('graphed',parameter,'...')
+    print('progress: ',round((index/len(parameters))*100,2),'graphed',parameter,'...')
+
+print('process has completed... thank you for your patience =)')
     
     
