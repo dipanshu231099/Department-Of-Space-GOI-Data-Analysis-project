@@ -12,5 +12,7 @@ was used. The data analysis was carried out in a python environment
 with some of the very helpful python3 libraries to carry out data science
 algorithms in an elegant and efficient manner.
 
+The entire dataset can not be shared for it being sensitive to the organisation.
+
 A detailed explaination can be seen in the `final_report.pdf`.
 
